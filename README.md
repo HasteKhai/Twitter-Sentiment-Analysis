@@ -9,7 +9,7 @@ This NLP project aims to detect hate speeches in tweets. For simplciity, we assu
 ### Dataset
 The provided datasets, a training set and a test set, contain tweets sold by MECP (around 32 000 instances). Here is an exhaustive list of features in the MECP inventory dataset.
 
-<!-- Features Taken from wc-product-export.csv shared to us by admin -->
+<!-- Features taken from train_E6oV3lV.csv -->
 > ### Features (Exhaustive List)
 > - ID
 > - Label
