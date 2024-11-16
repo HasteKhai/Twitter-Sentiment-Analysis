@@ -15,6 +15,9 @@ The provided datasets, a training set and a test set, contain tweets (around 32 
 > - Label
 > - Tweet
 
+### Data Pre-Processing
+Text is a highly unstrcutured form of data containing various types of noise. We must pre-process and clean the data to make the texts more standardized, making it noise-free for analysis.
+
 ## Model Design
 
 ### Class of Models
