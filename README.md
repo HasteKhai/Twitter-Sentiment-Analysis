@@ -7,7 +7,7 @@ Sentiment analysis is an application of Natural Language Processing (NLP) that u
 This NLP project aims to detect hate speeches in tweets. For simplciity, we assume that a tweet contains hate speech if it has a racist or sexist sentiment associated to it. Therefore, the goal is the classify racist or sexist tweets from others.
 
 ### Dataset
-The provided datasets, a training set and a test set, contain tweets sold by MECP (around 32 000 instances). Here is an exhaustive list of features in the MECP inventory dataset.
+The provided datasets, a training set and a test set, contain tweets (around 32 000 instances). Here is an exhaustive list of features in the MECP inventory dataset.
 
 <!-- Features taken from train_E6oV3lV.csv -->
 > ### Features (Exhaustive List)
