@@ -166,3 +166,53 @@ doc2vec.train(labeled_tweets, total_examples=len(combine['processed_tweet']), ep
 docvec_arrays = np.array([doc2vec.dv[i] for i in range(len(combine))])
 docvec_df = pd.DataFrame(docvec_arrays)
 print(docvec_arrays.shape)
+
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import f1_score
+
+# #BOW Features
+train_bow = bow[:31962,:]
+test_bow = bow[31962:,:]
+xtrain_bow, xvalid_bow, ytrain, yvalid = train_test_split(train_bow, train['label'], random_state = 42, test_size = 0.3)
+
+lreg = LogisticRegression()
+#
+# #train model
+# lreg.fit(xtrain_bow, ytrain)
+# prediction = lreg.predict_proba(xvalid_bow) # predict on validation
+# prediction_int = (prediction[:, 1] >= 0.3).astype(int)
+# print(f1_score(yvalid, prediction_int))
+
+#TF-IDF Features
+train_tfidf = tfidf[:31962,:]
+test_tfidf = tfidf[31962:,:]
+xtrain_tfidf = train_tfidf[ytrain.index]
+xvalid_tfidf = train_tfidf[yvalid.index]
+# lreg.fit(xtrain_tfidf,ytrain)
+# prediction = lreg.predict_proba(xvalid_tfidf)
+# prediction_int = (prediction[:,1] >= 0.3).astype(int)
+# print(f1_score(yvalid,prediction_int))
+
+## Support vector machine
+# from sklearn import svm
+# svc = svm.SVC(kernel='linear', C=1, probability=True).fit(xtrain_tfidf, ytrain)
+# prediction = svc.predict_proba(xvalid_tfidf)
+# prediction_int = (prediction[:,1] >= 0.3).astype(int)
+# print(f1_score(yvalid, prediction_int))
+
+from sklearn.ensemble import RandomForestClassifier
+
+rf = RandomForestClassifier(n_estimators=400, random_state=11).fit(xtrain_bow, ytrain)
+prediction = rf.predict(xvalid_bow)
+print(f1_score(yvalid,prediction))
+
+#XGBoost
+train_w2v = wordvec_df.iloc[:31962,:]
+test_w2v = wordvec_df.iloc[31962:,:]
+xtrain_w2v = train_w2v.iloc[ytrain.index,:]
+xvalid_w2v = train_w2v.iloc[yvalid.index,:]
+from xgboost import XGBClassifier
+xgb = XGBClassifier(max_depth=6, n_estimators=1000, ntread = 3).fit(xtrain_w2v, ytrain)
+prediction = xgb.predict(xvalid_w2v)
+print(f1_score(yvalid, prediction))
